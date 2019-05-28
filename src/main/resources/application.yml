@@ -1,0 +1,31 @@
+spring:
+  jpa:
+    show_sql: true
+    format_sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  aop:
+    proxy-target-class: true
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  datasource:
+    url: jdbc:mariadb://localhost:3306/elk?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: rhkfh1
+    driverClassName: org.mariadb.jdbc.Driver
+    validation-query: SELECT 1
+    test-on-borrow: true
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
