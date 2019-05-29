@@ -1,4 +1,4 @@
-package com.kbh.elk.app.config;
+package com.kbh.elk.app.config.jpa;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.aop.Advisor;

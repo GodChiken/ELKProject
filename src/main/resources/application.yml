@@ -1,4 +1,5 @@
 spring:
+  profiles: default
   jpa:
     show_sql: true
     format_sql: true
@@ -6,6 +7,9 @@ spring:
       ddl-auto: create
     properties:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        hibernate:
+          hbm2ddl:
+            import_files: /initial_data_query.sql
   aop:
     proxy-target-class: true
   http:
@@ -21,6 +25,7 @@ spring:
     validation-query: SELECT 1
     test-on-borrow: true
 logging:
+  file: application.log
   level:
     org:
       hibernate:
@@ -29,3 +34,6 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
+    com.kbh.elk.app.service.*: INFO
+aws.region
+

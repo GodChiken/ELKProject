@@ -1,6 +1,7 @@
 package com.kbh.elk.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 @EqualsAndHashCode(exclude = {"bookStore"})
 @ToString(exclude = {"bookStore"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 @Entity
 public class Book {
 	@Id
