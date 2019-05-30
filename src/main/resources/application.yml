@@ -24,16 +24,3 @@ spring:
     driverClassName: org.mariadb.jdbc.Driver
     validation-query: SELECT 1
     test-on-borrow: true
-logging:
-  file: application.log
-  level:
-    org:
-      hibernate:
-        SQL: DEBUG
-        type:
-          descriptor:
-            sql:
-              BasicBinder: TRACE
-    com.kbh.elk.app.service.*: INFO
-aws.region
-

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <pattern>{"projectID" : "ELKProject"}</pattern>
+                <timestamp/>
+                <threadName/>
+                <message/>
+                <loggerName/>
+                <logLevel/>
+                <stackTrace/>
+                <callerData/>
+            </providers>
+        </encoder>
+    </appender>
+
+    <appender name="STASH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logback/ELKProject.log</file>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <jsonGeneratorDecorator class="com.kbh.elk.app.config.logback.PrettyPrintingDecorator"/>
+            <jsonFactoryDecorator class="com.kbh.elk.app.config.logback.DateDecorator"/>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logback/ELKProject.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+    </appender>
+
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.hibernate.SQL" level="DEBUG" />
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
+
+    <root level="INFO">
+        <appender-ref ref="STASH"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
