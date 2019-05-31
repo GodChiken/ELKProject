@@ -114,6 +114,12 @@
             <artifactId>logback-access</artifactId>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.logback-extensions/logback-ext-loggly -->
+        <dependency>
+            <groupId>org.logback-extensions</groupId>
+            <artifactId>logback-ext-loggly</artifactId>
+            <version>0.1.5</version>
+        </dependency>
     </dependencies>
 
     <build>

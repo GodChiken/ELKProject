@@ -15,11 +15,11 @@ public class ELKController {
 
 	private BookService bookService;
 	private BookStoreService bookStoreService;
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private final Logger logger = LoggerFactory.getLogger("ELKProjectPipeLine");
 
 	@GetMapping(value = "/bookStore/{bookStoreIdx}")
 	public ResponseEntity bookStoreNameByIdx(@PathVariable int bookStoreIdx){
-		logger.debug("asdf");
+		logger.info("책방에서 책을 조회 하였다.");
 		return ResponseEntity.ok(bookStoreService.getBookStore(bookStoreIdx));
 	}
 
