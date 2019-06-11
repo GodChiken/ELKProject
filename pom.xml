@@ -57,7 +57,6 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -73,11 +72,6 @@
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>${com.fasterxml.jackson.datatype.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-s3</artifactId>
-            <version>${com.amazonaws.version}</version>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
@@ -125,11 +119,13 @@
             <artifactId>logback-elasticsearch-appender</artifactId>
             <version>1.6</version>
         </dependency>
-
     </dependencies>
-
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>com.mysema.maven</groupId>
                 <artifactId>apt-maven-plugin</artifactId>
@@ -148,5 +144,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
