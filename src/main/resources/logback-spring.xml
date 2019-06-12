@@ -1,32 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-    <!--<include resource="org/springframework/boot/logging/logback/defaults.xml"/>
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-            <providers>
-                <pattern>{"projectID" : "ELKProject"}</pattern>
-                <timestamp/>
-                <threadName/>
-                <message/>
-                <loggerName/>
-                <logLevel/>
-                <stackTrace/>
-                <callerData/>
-            </providers>
-        </encoder>
-    </appender>-->
+<configuration debug="true">
+    <!--이것을 포함해야 콘솔 로그에 관한 디폴트 설정을 가져올 수있다.-->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
     <appender name="ELASTIC" class="com.internetitem.logback.elasticsearch.ElasticsearchAppender">
         <!-- 필수값 -->
         <url>https://search-hanwoolnet-elk-i22r3nl3keyd6cv5orzlacxo7y.ap-northeast-2.es.amazonaws.com/_bulk</url> <!-- 적재하려는 ES 주소 -->
-        <index>logs-%date{yyyy-MM-dd}</index>
+        <index>kbh_toy_aws_es_log-%date{yyyy-MM-dd}</index>
         <type>log</type>
         <!-- 선택값 -->
         <!-- ES 내용을 콘솔이나 별도 로그파일로 보려고 하는 경우 반드시 logger name 지정해야 ES 적재 내용이 보임 -->
-        <loggerName>ELKProjectJsonLogger</loggerName>
+        <!--<loggerName>ELKProjectJsonLogger</loggerName>-->
         <includeMdc>true</includeMdc> <!-- MDC 를 이용하여 적재하는 경우 (default false) -->
-        <sleepTime>1000</sleepTime> <!-- sleepTime 후 비동기로 처리 (in ms, default 250) -->
-        <errorsToStderr>true</errorsToStderr> <!-- 에러내용을 콘솔창에 표시 (default false) -->
-        <logsToStderr>true</logsToStderr> <!-- 로그를 콘솔창에 표시 (default false) -->
+        <!--<sleepTime>1000</sleepTime> &lt;!&ndash; sleepTime 후 비동기로 처리 (in ms, default 250) &ndash;&gt;-->
+        <!--<errorsToStderr>false</errorsToStderr> &lt;!&ndash; 에러내용을 콘솔창에 표시 (default false) &ndash;&gt;-->
+        <!--<logsToStderr>false</logsToStderr> &lt;!&ndash; 로그를 콘솔창에 표시 (default false) &ndash;&gt;-->
         <headers>
             <header>
                 <name>Content-Type</name>
@@ -35,7 +23,23 @@
         </headers>
     </appender>
 
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){blue} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr([%-21t]){red} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+            </pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.hibernate.SQL" level="DEBUG" />
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="TRACE" />
     <logger name="com.kbh.elk.app.filter.LogFilter" level="info" additivity="false">
-        <appender-ref ref="ELASTIC" /> <!-- 앞에서 지정한 ES appender 로 보낸다. -->
+        <appender-ref ref="ELASTIC" />
     </logger>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
 </configuration>
