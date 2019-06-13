@@ -9,11 +9,11 @@
         <index>kbh_toy_aws_es_log-%date{yyyy-MM-dd}</index>
         <type>log</type>
 
-        <loggerName>ELKProjectJsonLogger</loggerName>
-        <includeMdc>true</includeMdc>
-        <sleepTime>1000</sleepTime>
-        <errorsToStderr>false</errorsToStderr>
-        <logsToStderr>false</logsToStderr>
+        <!--<loggerName>ELKProjectJsonLogger</loggerName>-->
+        <!--<includeMdc>true</includeMdc>-->
+        <!--<sleepTime>1000</sleepTime>-->
+        <!--<errorsToStderr>false</errorsToStderr>-->
+        <!--<logsToStderr>false</logsToStderr>-->
 
         <headers>
             <header>
