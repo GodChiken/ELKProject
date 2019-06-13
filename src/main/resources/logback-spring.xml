@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="true">
-    <!--이것을 포함해야 콘솔 로그에 관한 디폴트 설정을 가져올 수있다.-->
+
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
     <appender name="ELASTIC" class="com.internetitem.logback.elasticsearch.ElasticsearchAppender">
-        <!-- 필수값 -->
-        <url>https://search-hanwoolnet-elk-i22r3nl3keyd6cv5orzlacxo7y.ap-northeast-2.es.amazonaws.com/_bulk</url> <!-- 적재하려는 ES 주소 -->
+
+        <url>https://search-hanwoolnet-elk-i22r3nl3keyd6cv5orzlacxo7y.ap-northeast-2.es.amazonaws.com/_bulk</url>
         <index>kbh_toy_aws_es_log-%date{yyyy-MM-dd}</index>
         <type>log</type>
-        <!-- 선택값 -->
-        <!-- ES 내용을 콘솔이나 별도 로그파일로 보려고 하는 경우 반드시 logger name 지정해야 ES 적재 내용이 보임 -->
-        <!--<loggerName>ELKProjectJsonLogger</loggerName>-->
-        <includeMdc>true</includeMdc> <!-- MDC 를 이용하여 적재하는 경우 (default false) -->
-        <!--<sleepTime>1000</sleepTime> &lt;!&ndash; sleepTime 후 비동기로 처리 (in ms, default 250) &ndash;&gt;-->
-        <!--<errorsToStderr>false</errorsToStderr> &lt;!&ndash; 에러내용을 콘솔창에 표시 (default false) &ndash;&gt;-->
-        <!--<logsToStderr>false</logsToStderr> &lt;!&ndash; 로그를 콘솔창에 표시 (default false) &ndash;&gt;-->
+
+        <loggerName>ELKProjectJsonLogger</loggerName>
+        <includeMdc>true</includeMdc>
+        <sleepTime>1000</sleepTime>
+        <errorsToStderr>false</errorsToStderr>
+        <logsToStderr>false</logsToStderr>
+
         <headers>
             <header>
                 <name>Content-Type</name>
                 <value>application/json</value>
             </header>
         </headers>
+
     </appender>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">

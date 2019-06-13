@@ -24,7 +24,7 @@ spring:
 #    driverClassName: org.mariadb.jdbc.Driver
 #    validation-query: SELECT 1
 #    test-on-borrow: true
-    url: jdbc:mariadb://prepaymentdb.c0xvdbarxnyq.ap-northeast-2.rds.amazonaws.com:3306/elk_develop?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mariadb://prepaymentdb.c0xvdbarxnyq.ap-northeast-2.rds.amazonaws.com:3306/elk_develop?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     username: root
     password: core1502!
     driverClassName: org.mariadb.jdbc.Driver
