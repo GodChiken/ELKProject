@@ -3,27 +3,6 @@
 
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
-    <appender name="ELASTIC" class="com.internetitem.logback.elasticsearch.ElasticsearchAppender">
-
-        <url>https://search-hanwoolnet-elk-i22r3nl3keyd6cv5orzlacxo7y.ap-northeast-2.es.amazonaws.com/_bulk</url>
-        <index>kbh_toy_aws_es_log-%date{yyyy-MM-dd}</index>
-        <type>log</type>
-
-        <!--<loggerName>ELKProjectJsonLogger</loggerName>-->
-        <!--<includeMdc>true</includeMdc>-->
-        <!--<sleepTime>1000</sleepTime>-->
-        <!--<errorsToStderr>false</errorsToStderr>-->
-        <!--<logsToStderr>false</logsToStderr>-->
-
-        <headers>
-            <header>
-                <name>Content-Type</name>
-                <value>application/json</value>
-            </header>
-        </headers>
-
-    </appender>
-
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>
