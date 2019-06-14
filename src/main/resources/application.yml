@@ -30,3 +30,7 @@ spring:
     driverClassName: org.mariadb.jdbc.Driver
     validation-query: SELECT 1
     test-on-borrow: true
+  mvc:
+    view:
+      prefix: /WEB-INF/pages/
+      suffix: .jsp
