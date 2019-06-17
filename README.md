@@ -13,16 +13,16 @@
 ## Install
 
 ```sh
-npm install
+Copy Clone Plese
 ```
 
 ## Usage
 
 ```sh
-Hi
+Spring Boot Application for Study ELK Stack
 ```
 
-## Run tests
+## Study List
 
 ```sh
 ASDF
