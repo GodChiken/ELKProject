@@ -1,8 +1,11 @@
 <h1 align="center">Welcome to  ELKProject 👋</h1>
 <p>
-  <img src="https://img.shields.io/badge/version-0.0.1-SNAPSHOT-blue.svg?cacheSeconds=2592000" />
+  <img src="https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/GodChiken/ELKProject">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" target="_blank" />
+  </a>
+  <a href="https://www.npmjs.com/package/readme-md-generator">
+    <img alt="downloads" src="https://img.shields.io/badge/download-10-blue.svg" target="_blank" />
   </a>
 </p>
 
