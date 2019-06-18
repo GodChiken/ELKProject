@@ -24,6 +24,7 @@
         <com.fasterxml.jackson.datatype.version>2.9.8</com.fasterxml.jackson.datatype.version>
         <com.amazonaws.version>1.11.238</com.amazonaws.version>
         <org.json.version>20180813</org.json.version>
+        <maven.test.skip>true</maven.test.skip>
     </properties>
 
     <dependencies>

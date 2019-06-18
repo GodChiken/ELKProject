@@ -9,22 +9,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.concurrent.ExecutionException;
+
 @Controller
 @AllArgsConstructor
 public class ELKController {
 
 	private BookService bookService;
 	private BookStoreService bookStoreService;
-	private final Logger logger = LoggerFactory.getLogger("ELKProjectPipeLine");
 
 	@GetMapping(value = "/bookStore/{bookStoreIdx}")
 	public ResponseEntity bookStoreNameByIdx(@PathVariable int bookStoreIdx){
-		logger.info("책방에서 책을 조회 하였다.");
 		return ResponseEntity.ok(bookStoreService.getBookStore(bookStoreIdx));
 	}
 
 	@GetMapping(value = "/book/{bookIdx}")
-	public ResponseEntity book(@PathVariable int bookIdx){
+	public ResponseEntity book(@PathVariable int bookIdx) throws ExecutionException, InterruptedException {
 		return ResponseEntity.ok(bookService.select(bookIdx));
 	}
 

@@ -10,7 +10,7 @@
         <type>log</type>
 
         <!--<loggerName>ELKProjectJsonLogger</loggerName>-->
-        <!--<includeMdc>true</includeMdc>-->
+        <includeMdc>true</includeMdc>
         <!--<sleepTime>1000</sleepTime>-->
         <!--<errorsToStderr>false</errorsToStderr>-->
         <!--<logsToStderr>false</logsToStderr>-->
@@ -27,7 +27,7 @@
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>
-                %clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){blue} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr([%-21t]){red} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+                %clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){cyan} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr([%-21t]){red} %clr(%-40.40logger{39}){blue} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
             </pattern>
         </encoder>
     </appender>
@@ -35,9 +35,10 @@
     <logger name="org.hibernate.SQL" level="DEBUG" />
     <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
     <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="TRACE" />
-    <logger name="com.kbh.elk.app.filter.LogFilter" level="info" additivity="false">
-        <appender-ref ref="ELASTIC" />
-    </logger>
+    <logger name="org.hibernate.transaction.JDBCTransaction" level="DEBUG"/>
+    <logger name="org.hibernate.jdbc.ConnectionManager" level="DEBUG"/>
+    <logger name="org.springframework.orm.jpa.JpaTransactionManager" level="DEBUG"/>
+    <logger name="com.kbh.elk.app.config.filter.LogFilter" level="info" additivity="false"><appender-ref ref="ELASTIC" /></logger>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>

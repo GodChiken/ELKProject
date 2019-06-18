@@ -1,4 +1,4 @@
-package com.kbh.elk.app.filter;
+package com.kbh.elk.app.config.filter;
 
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
@@ -21,23 +21,28 @@ public class LogFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		requestConfigForMDC(request);
+		chain.doFilter(request, response);
+		responseConfigForMDC(response);
+		MDC.clear();
+	}
 
+	private void requestConfigForMDC(ServletRequest request) {
 		HttpServletRequest req = (HttpServletRequest) request;
-		HttpServletResponse res = (HttpServletResponse) response;
-
-		MDC.put("requestUri", ((HttpServletRequest) request).getRequestURI());
+		MDC.put("UUID", Thread.currentThread().getName());
+		MDC.put("req", String.valueOf(req));
+		MDC.put("requestUri", req.getRequestURI());
 		MDC.put("method", req.getMethod());
 		MDC.put("reqRes", " Request");
 		log.info("{}", "Request");
+	}
 
-		chain.doFilter(request, response);
+	private void responseConfigForMDC(ServletResponse response) {
+		HttpServletResponse res = (HttpServletResponse) response;
 
-		// Response
 		MDC.put("reqRes", " Response");
-		MDC.put("status", String.valueOf(res.getStatus())); // Req or Res
+		MDC.put("status", String.valueOf(res.getStatus()));
 		log.info("{}", "Response");
-
-		MDC.clear();
 	}
 
 	@Override
