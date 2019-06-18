@@ -29,6 +29,7 @@ public class LogFilter implements Filter {
 
 	private void requestConfigForMDC(ServletRequest request) {
 		HttpServletRequest req = (HttpServletRequest) request;
+
 		MDC.put("UUID", Thread.currentThread().getName());
 		MDC.put("req", String.valueOf(req));
 		MDC.put("requestUri", req.getRequestURI());

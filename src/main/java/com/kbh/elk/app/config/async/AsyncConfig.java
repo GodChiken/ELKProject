@@ -50,19 +50,3 @@ public class AsyncConfig implements AsyncConfigurer {
 		return asyncExceptionHandler;
 	}
 }
-
-
-/**
-2019-06-17 10:46:29.669 DEBUG 17192 [KBH-T-1              ] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [*]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,-java.lang.Exception
-2019-06-17 10:46:29.669 DEBUG 17192 [KBH-T-1              ] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(776919546PersistenceContext[entityKeys=[],collectionKeys=[]];ActionQueue[insertions=ExecutableList{size=0} updates=ExecutableList{size=0} deletions=ExecutableList{size=0} orphanRemovals=ExecutableList{size=0} collectionCreations=ExecutableList{size=0} collectionRemovals=ExecutableList{size=0} collectionUpdates=ExecutableList{size=0} collectionQueuedOps=ExecutableList{size=0} unresolvedInsertDependencies=null])] for JPA transaction
-2019-06-17 10:46:29.669 DEBUG 17192 [KBH-T-1              ] o.h.e.t.internal.TransactionImpl         : On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
-2019-06-17 10:46:29.669 DEBUG 17192 [KBH-T-1              ] o.h.e.t.internal.TransactionImpl         : begin
-2019-06-17 10:46:29.685 DEBUG 17192 [KBH-T-1              ] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@20893243]
-2019-06-17 10:46:29.689 DEBUG 17192 [KBH-T-1              ] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(776919546PersistenceContext[entityKeys=[],collectionKeys=[]];ActionQueue[insertions=ExecutableList{size=0} updates=ExecutableList{size=0} deletions=ExecutableList{size=0} orphanRemovals=ExecutableList{size=0} collectionCreations=ExecutableList{size=0} collectionRemovals=ExecutableList{size=0} collectionUpdates=ExecutableList{size=0} collectionQueuedOps=ExecutableList{size=0} unresolvedInsertDependencies=null])] for JPA transaction
-2019-06-17 10:46:29.689 DEBUG 17192 [KBH-T-1              ] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
-2019-06-17 10:46:29.695 DEBUG 17192 [KBH-T-1              ] stomAnnotationTransactionAttributeSource : Adding transactional method 'getOne' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
-2019-06-17 10:46:29.696 DEBUG 17192 [KBH-T-1              ] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(776919546PersistenceContext[entityKeys=[],collectionKeys=[]];ActionQueue[insertions=ExecutableList{size=0} updates=ExecutableList{size=0} deletions=ExecutableList{size=0} orphanRemovals=ExecutableList{size=0} collectionCreations=ExecutableList{size=0} collectionRemovals=ExecutableList{size=0} collectionUpdates=ExecutableList{size=0} collectionQueuedOps=ExecutableList{size=0} unresolvedInsertDependencies=null])] for JPA transaction
-2019-06-17 10:46:29.696 DEBUG 17192 [KBH-T-1              ] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
-2019-06-17 10:46:29.696 TRACE 17192 [KBH-T-1              ] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.getOne]
-2019-06-17 10:46:29.703 TRACE 17192 [KBH-T-1              ] .s.t.s.TransactionSynchronizationManager : Retrieved value [org.springframework.orm.jpa.EntityManagerHolder@61b43878] for key [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean@1f0e2bdc] bound to thread [KBH-T-1]
- */
