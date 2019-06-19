@@ -28,7 +28,21 @@ Spring Boot Application for Study ELK Stack
 ## Study List
 
 ```sh
-ASDF
+ELK Stack (Elasitcsearch, Logstash, Kibnan)
+- watch ELK start video
+    - what is Elasticsearch
+    - what is Logstash
+    - what is Kibana
+- install & config ELK stack in AWS EC2
+- send Logback log to AWS ES(Elasticsearch Service)
+Spring
+    - Thread        
+    - @Async, AsyncConfig, AsyncHandler
+JPA
+    - set JPA Trasaction AOP 
+ETC
+    - MDC
+    - LogBack
 ```
 
 ## Author
