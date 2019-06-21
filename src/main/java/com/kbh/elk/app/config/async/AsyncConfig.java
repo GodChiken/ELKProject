@@ -1,6 +1,6 @@
 package com.kbh.elk.app.config.async;
 
-import com.kbh.elk.app.config.exception.AsyncExceptionHandler;
+import com.kbh.elk.app.config.exception.handler.AsyncExceptionHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Bean;
@@ -13,11 +13,11 @@ import java.util.UUID;
 import java.util.concurrent.Executor;
 
 /**
-  ASYNC_TASK_CORE_POOL_SIZE    :   기본 Thread 수
-  ASYNC_TASK_MAX_POOL_SIZE     :   최대 Thread 수
-  ASYNC_TASK_QUEUE_CAPACITY    :   QUEUE 수
-  ASYNC_EXECUTOR_BEAN_NAME     :   Thread Bean Name
-  ASYNC_THREAD_PREFIX          :   스레드 비동기 전위문자열
+ * ASYNC_TASK_CORE_POOL_SIZE    :   기본 Thread 수
+ * ASYNC_TASK_MAX_POOL_SIZE     :   최대 Thread 수
+ * ASYNC_TASK_QUEUE_CAPACITY    :   QUEUE 수
+ * ASYNC_EXECUTOR_BEAN_NAME     :   Thread Bean Name
+ * ASYNC_THREAD_PREFIX          :   스레드 비동기 전위문자열
  */
 
 @Configuration
@@ -41,10 +41,11 @@ public class AsyncConfig implements AsyncConfigurer {
 		taskExecutor.setMaxPoolSize(ASYNC_TASK_MAX_POOL_SIZE);
 		taskExecutor.setQueueCapacity(ASYNC_TASK_QUEUE_CAPACITY);
 		taskExecutor.setBeanName(ASYNC_EXECUTOR_BEAN_NAME);
-		taskExecutor.setThreadNamePrefix(ASYNC_THREAD_PREFIX+ UUID.randomUUID().toString());
+		taskExecutor.setThreadNamePrefix(ASYNC_THREAD_PREFIX + UUID.randomUUID().toString());
 		taskExecutor.initialize();
 		return taskExecutor;
 	}
+
 	@Override
 	public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
 		return asyncExceptionHandler;

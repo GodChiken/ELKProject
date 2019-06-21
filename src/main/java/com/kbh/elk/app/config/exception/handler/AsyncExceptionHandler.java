@@ -1,4 +1,4 @@
-package com.kbh.elk.app.config.exception;
+package com.kbh.elk.app.config.exception.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
