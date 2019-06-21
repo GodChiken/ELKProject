@@ -20,9 +20,10 @@ public class Book {
 	private int bookIdx;
 	private String name;
 	private String author;
+
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "book_store_name")
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@JoinColumn(name = "book_store_idx")
 	private BookStore bookStore;
 
 }

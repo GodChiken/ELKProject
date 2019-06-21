@@ -25,7 +25,7 @@ public class ELKController {
 
 	@GetMapping(value = "/book/{bookIdx}")
 	public ResponseEntity book(@PathVariable int bookIdx) throws ExecutionException, InterruptedException {
-		return ResponseEntity.ok(bookService.select(bookIdx));
+		return ResponseEntity.ok(bookService.select(bookIdx).get());
 	}
 
 	@PostMapping(value = "/book")

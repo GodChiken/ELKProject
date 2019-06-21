@@ -11,27 +11,31 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class RestExceptionHandler {
 
-	private static ErrorMessageMap messageMap;
+	private ErrorMessageMap messageMap;
 
 	@ExceptionHandler(BusinessException.class)
 	public ResponseEntity businessException(BusinessException e) {
-		return new ResponseEntity(createErrorEntity(e.getErrorCode(), HttpStatus.UNPROCESSABLE_ENTITY), HttpStatus.UNPROCESSABLE_ENTITY);
+		return mappingErrorToResponseEntity(e,HttpStatus.UNPROCESSABLE_ENTITY);
 	}
 
 	@ExceptionHandler(FieldValidationException.class)
-	public ResponseEntity fieldValidationException(BusinessException e) {
-		return new ResponseEntity(createErrorEntity(e.getErrorCode(), HttpStatus.BAD_REQUEST), HttpStatus.BAD_REQUEST);
+	public ResponseEntity fieldValidationException(FieldValidationException e) {
+		return mappingErrorToResponseEntity(e,HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(NoResourceException.class)
-	public ResponseEntity noResourceException(BusinessException e) {
-		return new ResponseEntity(createErrorEntity(e.getErrorCode(), HttpStatus.FORBIDDEN), HttpStatus.FORBIDDEN);
+	public ResponseEntity noResourceException(NoResourceException e) {
+		return mappingErrorToResponseEntity(e,HttpStatus.FORBIDDEN);
 	}
 
-	public ErrorEntity createErrorEntity(int errCode, HttpStatus httpStatus) {
+	private ResponseEntity mappingErrorToResponseEntity(BaseException e, HttpStatus status) {
+		return new ResponseEntity(createErrorEntity(e.getErrorCode(), status), status);
+	}
+
+	private ErrorEntity createErrorEntity(int errCode, HttpStatus httpStatus) {
 		return ErrorEntity.builder()
 				.code(errCode)
 				.message(messageMap.getMessage(errCode))
-				.status(String.valueOf(httpStatus)).build();
+				.status(String.valueOf(httpStatus.value())).build();
 	}
 }

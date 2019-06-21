@@ -1,6 +1,7 @@
 package com.kbh.elk.app.config.exception.common;
 
 import lombok.Getter;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -12,6 +13,7 @@ import java.util.TreeMap;
  */
 
 @Getter
+@Component
 public class ErrorMessageMap {
 	private static Map<Integer, String> messageMap = new TreeMap<>();
 
