@@ -35,3 +35,6 @@ spring:
     view:
       prefix: /WEB-INF/pages/
       suffix: .jsp
+server:
+  tomcat:
+    max-threads: 1

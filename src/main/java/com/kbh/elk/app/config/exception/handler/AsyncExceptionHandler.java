@@ -1,7 +1,6 @@
 package com.kbh.elk.app.config.exception.handler;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.stereotype.Component;
 
@@ -9,16 +8,16 @@ import java.lang.reflect.Method;
 import java.util.StringJoiner;
 import java.util.stream.Stream;
 
+@Slf4j
 @Component
 public class AsyncExceptionHandler implements AsyncUncaughtExceptionHandler {
 
 	private final static String FLOW_PATTERN = " > ";
 	private final static String PACKAGE_SPLIT = "\\.";
-	private final Logger logger = LoggerFactory.getLogger(AsyncExceptionHandler.class);
 
 	@Override
 	public void handleUncaughtException(Throwable throwable, Method method, Object... objects) {
-		logger.error(getAsyncMessageFormat(method),throwable);
+		log.error(getAsyncMessageFormat(method),throwable);
 	}
 
 	private String getAsyncMessageFormat(Method method) {

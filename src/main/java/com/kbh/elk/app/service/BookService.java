@@ -9,10 +9,9 @@ import com.kbh.elk.app.repository.BookStoreRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @AllArgsConstructor
@@ -24,10 +23,10 @@ public class BookService {
 	private BookStoreRepository bookStoreRepository;
 
 	@Async("taskExecutor")
-	public Future<BookDTO> select(int bookIdx) {
+	public CompletableFuture<BookDTO> select(int bookIdx){
 		Book book = bookRepository.findById(bookIdx).orElseThrow(() -> new BusinessException(10000));
 		BookDTO bookDTO = convertDTO(book);
-		return new AsyncResult<>(bookDTO);
+		return CompletableFuture.completedFuture(bookDTO);
 	}
 	public void insert(){
 		Book book = new Book();

@@ -3,8 +3,6 @@ package com.kbh.elk.app.presentation;
 import com.kbh.elk.app.service.BookService;
 import com.kbh.elk.app.service.BookStoreService;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +40,7 @@ public class ELKController {
 
 	@DeleteMapping(value = "/book/{bookIdx}")
 	public ResponseEntity deleteBookForBookStoreIdx(@PathVariable int bookIdx){
+		bookService.delete(bookIdx);
 		return ResponseEntity.ok().build();
 	}
 }

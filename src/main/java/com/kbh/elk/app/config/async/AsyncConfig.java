@@ -18,6 +18,8 @@ import java.util.concurrent.Executor;
  * ASYNC_TASK_QUEUE_CAPACITY    :   QUEUE 수
  * ASYNC_EXECUTOR_BEAN_NAME     :   Thread Bean Name
  * ASYNC_THREAD_PREFIX          :   스레드 비동기 전위문자열
+ *
+ * void, Future
  */
 
 @Configuration
