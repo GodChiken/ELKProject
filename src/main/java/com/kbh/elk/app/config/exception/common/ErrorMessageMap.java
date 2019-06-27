@@ -22,6 +22,7 @@ public class ErrorMessageMap {
 		initBusinessCode();
 		initFieldValidationCode();
 		initNoResourceCode();
+		initInternalLogError();
 	}
 
 	private static void initBusinessCode() {
@@ -34,6 +35,11 @@ public class ErrorMessageMap {
 
 	private static void initNoResourceCode() {
 		messageMap.put(30000, "no resource error");
+	}
+
+	private static void initInternalLogError() {
+		messageMap.put(41000, "request logging error");
+		messageMap.put(42000, "response logging error");
 	}
 
 	public String getMessage(int code) {

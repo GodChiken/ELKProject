@@ -7,7 +7,6 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-@ServletComponentScan
 public class ELKApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ELKApplication.class, args);

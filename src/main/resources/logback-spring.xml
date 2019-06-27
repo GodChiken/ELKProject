@@ -38,7 +38,7 @@
     <logger name="org.hibernate.transaction.JDBCTransaction" level="DEBUG"/>
     <logger name="org.hibernate.jdbc.ConnectionManager" level="DEBUG"/>
     <logger name="org.springframework.orm.jpa.JpaTransactionManager" level="DEBUG"/>
-    <logger name="com.kbh.elk.app.config.filter.LogFilter" level="info" additivity="false"><appender-ref ref="ELASTIC" /></logger>
+    <logger name="com.kbh.elk.app.config.filter.LoggingFilter" level="info" additivity="false"><appender-ref ref="ELASTIC" /></logger>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
