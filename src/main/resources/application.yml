@@ -36,5 +36,4 @@ spring:
       prefix: /WEB-INF/pages/
       suffix: .jsp
 server:
-  tomcat:
-    max-threads: 1
+  port: 8080

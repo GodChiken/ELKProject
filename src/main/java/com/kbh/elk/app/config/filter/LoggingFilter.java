@@ -18,8 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 import java.util.StringJoiner;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 import static java.lang.String.valueOf;
 
@@ -37,10 +39,21 @@ public class LoggingFilter extends OncePerRequestFilter {
 		chain.doFilter(request, response);
 		Map<String, Object> responseMap = LogUtil.makeLoggingResponseMap(response);
 		setUniqueIdentifier(requestMap,responseMap);
-		log.info(new ObjectMapper().writeValueAsString(requestMap));
-		log.info(new ObjectMapper().writeValueAsString(responseMap));
+		requestMap.entrySet().stream().forEach(getValidatedLogField());
+		log.info("REQUEST");
+		responseMap.entrySet().stream().forEach(getValidatedLogField());
+		log.info("RESPONSE");
 		MDC.clear();
 		response.copyBodyToResponse();
+	}
+
+	private Consumer<Map.Entry<String, Object>> getValidatedLogField() {
+		return entry -> MDC.put(
+							entry.getKey(),
+							Optional.ofNullable(entry.getValue())
+									.map(e -> e.toString())
+									.orElse("DATA CHECKED - EMPTY")
+		);
 	}
 
 	@Override
@@ -56,8 +69,6 @@ public class LoggingFilter extends OncePerRequestFilter {
 	}
 	private String generateUniqueIdentifier() {
 		return valueOf(new StringJoiner("-")
-				.add("KBH")
-				.add("T")
-				.add(valueOf(UUID.randomUUID())));
+				.add("KBH").add("T").add(valueOf(UUID.randomUUID())));
 	}
 }

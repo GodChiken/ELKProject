@@ -15,6 +15,9 @@ public class ResponseWrapper extends ContentCachingResponseWrapper {
 	}
 
 	Object convertToObject() throws IOException {
+		if (getContentAsByteArray().length == 0) {
+			return "";
+		}
 		return objectMapper.readValue(getContentAsByteArray(), Object.class);
 	}
 }
