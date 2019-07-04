@@ -1,11 +1,17 @@
 package com.kbh.elk.app.util;
 
+import eu.bitwalker.useragentutils.Browser;
+import eu.bitwalker.useragentutils.OperatingSystem;
+import eu.bitwalker.useragentutils.UserAgent;
+import eu.bitwalker.useragentutils.Version;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Consumer;
 
 public class LogUtil {
 	public static Map<String, Object> makeLoggingRequestMap(HttpServletRequest request) {
@@ -22,12 +28,34 @@ public class LogUtil {
 	private static void buildRequestHeader(HttpServletRequest request, Map<String, Object> requestMap) {
 		Map<String, Object> requestHeaderMap = new HashMap<>();
 		Collections.list(request.getHeaderNames()).stream()
-				.parallel().forEach(
-						headerName ->
-								requestHeaderMap.put(headerName, request.getHeader(headerName))
-				);
-		requestMap.put("header", requestHeaderMap);
+				.parallel().forEach(headerInfoSetting(request, requestHeaderMap));
+		requestHeaderMap.entrySet().parallelStream()
+				.forEach(element -> requestMap.put(element.getKey(), element.getValue()));
+	}
 
+	private static Consumer<String> headerInfoSetting(HttpServletRequest request, Map<String, Object> requestHeaderMap) {
+		return headerName -> {
+			if (headerName.equals("user-agent"))
+				requestHeaderMap.putAll(separateUserAgent(request.getHeader(headerName)));
+			else requestHeaderMap.put(headerName, request.getHeader(headerName));
+		};
+	}
+
+	private static Map<? extends String, ?> separateUserAgent(String userAgentString) {
+		Map<String, Object> userAgentMap = new HashMap<>();
+		UserAgent userAgent = UserAgent.parseUserAgentString(userAgentString);
+		Browser browser = userAgent.getBrowser();
+		Version version = userAgent.getBrowserVersion();
+		userAgentMap.put("browserName", browser.getName());
+		userAgentMap.put("browserType", browser.getBrowserType());
+		userAgentMap.put("browserManufacturer", browser.getManufacturer());
+		userAgentMap.put("browserRenderingEngine", browser.getRenderingEngine());
+		userAgentMap.put("browserVersion", version.getVersion());
+		OperatingSystem operatingSystem = userAgent.getOperatingSystem();
+		userAgentMap.put("OSType", operatingSystem.getDeviceType());
+		userAgentMap.put("OSManufacture", operatingSystem.getManufacturer());
+		userAgentMap.put("OSName", operatingSystem.getName());
+		return userAgentMap;
 	}
 
 	private static Map<String, Object> buildRequestInfo(HttpServletRequest request) {
@@ -59,11 +87,10 @@ public class LogUtil {
 
 	private static void buildResponseHeader(HttpServletResponse response, Map<String, Object> responseMap) {
 		Map<String, Object> responseHeaderMap = new HashMap<>();
-		response.getHeaderNames().stream().parallel()
-				.forEach(
-						headerName ->
-								responseHeaderMap.put(headerName, response.getHeader(headerName))
-				);
+		response.getHeaderNames().stream()
+				.parallel()
+				.forEach(headerName
+						-> responseHeaderMap.put(headerName, response.getHeader(headerName)));
 		responseMap.put("header", responseHeaderMap);
 	}
 }

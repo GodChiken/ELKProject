@@ -2,6 +2,7 @@ package com.example.demo;
 
 
 import com.kbh.elk.app.ELKApplication;
+
 import com.kbh.elk.app.presentation.ELKController;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Before;
@@ -52,13 +53,13 @@ public class AsyncRequestTester {
 		url.add("http://localhost:8080/book/{bookIdx}");
 		url.add("http://localhost:8080/bookStore/{bookStoreIdx}");
 
-		for (int i = 0; i < 8000; i++) {
+		for (int i = 0; i < 12000; i++) {
 			sleep(RandomUtils.nextInt(1000,3000));
 			RestTemplate restTemplate = new RestTemplate();
 			restTemplate.getForEntity(url.get(
 					RandomUtils.nextInt(0,2))
 					,String.class
-					,RandomUtils.nextInt(1,9)
+					,RandomUtils.nextInt(1,12)
 			);
 		}
 	}

@@ -1,6 +1,5 @@
 package com.kbh.elk.app.config.filter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kbh.elk.app.util.LogUtil;
 import com.kbh.elk.app.util.RequestWrapper;
 import com.kbh.elk.app.util.ResponseWrapper;
@@ -33,27 +32,28 @@ public class LoggingFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest req,
 	                                HttpServletResponse res,
 	                                FilterChain chain) throws ServletException, IOException {
+
 		ContentCachingRequestWrapper request = new RequestWrapper(req);
 		ContentCachingResponseWrapper response = new ResponseWrapper(res);
 		Map<String, Object> requestMap = LogUtil.makeLoggingRequestMap(request);
 		chain.doFilter(request, response);
 		Map<String, Object> responseMap = LogUtil.makeLoggingResponseMap(response);
-		setUniqueIdentifier(requestMap,responseMap);
+		setUniqueIdentifier(requestMap, responseMap);
 		requestMap.entrySet().stream().forEach(getValidatedLogField());
 		log.info("REQUEST");
 		responseMap.entrySet().stream().forEach(getValidatedLogField());
 		log.info("RESPONSE");
 		MDC.clear();
+
 		response.copyBodyToResponse();
 	}
 
 	private Consumer<Map.Entry<String, Object>> getValidatedLogField() {
 		return entry -> MDC.put(
-							entry.getKey(),
-							Optional.ofNullable(entry.getValue())
-									.map(e -> e.toString())
-									.orElse("DATA CHECKED - EMPTY")
-		);
+				entry.getKey(),
+				Optional.ofNullable(entry.getValue())
+						.map(e -> e.toString())
+						.orElse("DATA CHECKED - EMPTY"));
 	}
 
 	@Override
@@ -62,11 +62,13 @@ public class LoggingFilter extends OncePerRequestFilter {
 		String targetPath = request.getServletPath();
 		return pathMatcher.match("/favicon.ico", targetPath);
 	}
-	private void setUniqueIdentifier(Map requestMap, Map responseMap){
+
+	private void setUniqueIdentifier(Map requestMap, Map responseMap) {
 		String uniqueIdentifier = generateUniqueIdentifier();
-		requestMap.put("UUID",uniqueIdentifier);
-		responseMap.put("UUID",uniqueIdentifier);
+		requestMap.put("UUID", uniqueIdentifier);
+		responseMap.put("UUID", uniqueIdentifier);
 	}
+
 	private String generateUniqueIdentifier() {
 		return valueOf(new StringJoiner("-")
 				.add("KBH").add("T").add(valueOf(UUID.randomUUID())));
