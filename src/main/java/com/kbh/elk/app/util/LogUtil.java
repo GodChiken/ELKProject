@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public class LogUtil {
@@ -50,7 +51,7 @@ public class LogUtil {
 		userAgentMap.put("browserType", browser.getBrowserType());
 		userAgentMap.put("browserManufacturer", browser.getManufacturer());
 		userAgentMap.put("browserRenderingEngine", browser.getRenderingEngine());
-		userAgentMap.put("browserVersion", version.getVersion());
+		userAgentMap.put("browserVersion", Optional.ofNullable(version).map(v -> v.getVersion()).orElse(""));
 		OperatingSystem operatingSystem = userAgent.getOperatingSystem();
 		userAgentMap.put("OSType", operatingSystem.getDeviceType());
 		userAgentMap.put("OSManufacture", operatingSystem.getManufacturer());
