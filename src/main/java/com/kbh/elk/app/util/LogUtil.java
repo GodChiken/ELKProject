@@ -55,7 +55,7 @@ public class LogUtil {
 		OperatingSystem operatingSystem = userAgent.getOperatingSystem();
 		userAgentMap.put("OSType", operatingSystem.getDeviceType());
 		userAgentMap.put("OSManufacture", operatingSystem.getManufacturer());
-		userAgentMap.put("OSName", operatingSystem.getName());
+		userAgentMap.put( "OSName", operatingSystem.getName());
 		return userAgentMap;
 	}
 
