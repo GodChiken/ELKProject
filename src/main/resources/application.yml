@@ -20,7 +20,7 @@ spring:
       force: true
   datasource:
 #    url: jdbc:mariadb://localhost:3306/elk?useUnicode=true&characterEncoding=utf8
-#    username: root
+#    username: kbh
 #    password: rhkfh1
 #    driverClassName: org.mariadb.jdbc.Driver
 #    validation-query: SELECT 1

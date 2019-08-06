@@ -4,10 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Map;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public enum BookType {
+public enum BookType implements BaseEnum{
 	HISTORY("역사"),
 	STUDY("학습"),
 	BUSINESS("사업"),
@@ -16,4 +18,5 @@ public enum BookType {
 	PROGRAMMING("프로그래밍");
 
 	private String name;
+
 }
