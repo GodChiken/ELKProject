@@ -16,4 +16,5 @@ public enum BookType implements BaseEnum{
 	PROGRAMMING("프로그래밍");
 
 	private String name;
+
 }
