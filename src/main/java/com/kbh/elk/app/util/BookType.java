@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public enum BookType {
+public enum BookType implements BaseEnum{
 	HISTORY("역사"),
 	STUDY("학습"),
 	BUSINESS("사업"),
