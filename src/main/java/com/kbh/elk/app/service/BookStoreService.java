@@ -19,8 +19,7 @@ public class BookStoreService {
 
 	public BookStoreDTO getBookStore(int bookStoreIdx){
 		BookStore bookStore = bookStoreRepository.findById(bookStoreIdx).orElseThrow(() -> new BusinessException(10000));
-		BookStoreDTO bookStoreDTO = convertDTO(bookStore);
-		return bookStoreDTO;
+		return convertDTO(bookStore);
 	}
 	public BookStoreDTO convertDTO(BookStore bookStore){
 		return modelMapper.map(bookStore, BookStoreDTO.class);
